@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 /// [controller]: optional/mandatory, exposes the animation controller created by Animate_do
 /// [manualTrigger]: boolean that indicates if you want to trigger the animation manually with the controller
 /// [animate]: For a State controller property, if you re-render changing it from false to true, the animation will be fired inmediatelly
+
+final Curve animationCurve = Curves.easeOutExpo;
+
 class FadeIn extends StatefulWidget {
   final Widget child;
   final Duration duration;
@@ -55,7 +58,7 @@ class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
     super.initState();
 
     controller = AnimationController(duration: widget.duration, vsync: this);
-    animation = CurvedAnimation(curve: Curves.easeOut, parent: controller!);
+    animation = CurvedAnimation(curve: animationCurve, parent: controller!);
 
     if (!widget.manualTrigger && widget.animate) {
       Future.delayed(widget.delay, () {
@@ -147,7 +150,7 @@ class _FadeInDownState extends State<FadeInDown>
     controller = AnimationController(duration: widget.duration, vsync: this);
 
     animation = Tween<double>(begin: widget.from * -1, end: 0)
-        .animate(CurvedAnimation(parent: controller!, curve: Curves.easeOut));
+        .animate(CurvedAnimation(parent: controller!, curve: animationCurve));
 
     opacity = Tween<double>(begin: 0, end: 1).animate(
         CurvedAnimation(parent: controller!, curve: const Interval(0, 0.65)));
@@ -287,7 +290,7 @@ class _FadeInUpState extends State<FadeInUp>
     controller = AnimationController(duration: widget.duration, vsync: this);
 
     animation = Tween<double>(begin: widget.from, end: 0)
-        .animate(CurvedAnimation(parent: controller!, curve: Curves.easeOut));
+        .animate(CurvedAnimation(parent: controller!, curve: animationCurve));
     opacity = Tween<double>(begin: 0, end: 1).animate(
         CurvedAnimation(parent: controller!, curve: const Interval(0, 0.65)));
 
@@ -427,7 +430,7 @@ class _FadeInLeftState extends State<FadeInLeft>
     controller = AnimationController(duration: widget.duration, vsync: this);
 
     animation = Tween<double>(begin: widget.from * -1, end: 0)
-        .animate(CurvedAnimation(parent: controller!, curve: Curves.easeOut));
+        .animate(CurvedAnimation(parent: controller!, curve: animationCurve));
     opacity = Tween<double>(begin: 0, end: 1).animate(
         CurvedAnimation(parent: controller!, curve: const Interval(0, 0.65)));
 
@@ -567,7 +570,7 @@ class _FadeInRightState extends State<FadeInRight>
     controller = AnimationController(duration: widget.duration, vsync: this);
 
     animation = Tween<double>(begin: widget.from, end: 0)
-        .animate(CurvedAnimation(parent: controller!, curve: Curves.easeOut));
+        .animate(CurvedAnimation(parent: controller!, curve: animationCurve));
     opacity = Tween<double>(begin: 0, end: 1).animate(
         CurvedAnimation(parent: controller!, curve: const Interval(0, 0.65)));
 
